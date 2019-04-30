@@ -12,7 +12,6 @@ let element_in_list ele lis equ =
   in
   element_in_list_helper ele lis equ 0
 
-
 let list_length li =
   let rec helper l len =
     match l with

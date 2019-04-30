@@ -1,1 +1,1 @@
-lib/box.ml: Printf Term
+lib/box.ml: List Printf Term

@@ -105,6 +105,7 @@ type binding = | R of rBinding (*role*)
                | B of bBinding (*base*)
                | C of cBinding (*constant*)
 
+(* don't know what to do whith this
 let type_binding bb =
   match bb with
   | R(r) -> (
@@ -122,6 +123,7 @@ let type_binding bb =
     then ToRule
     else FromRule
   )
+*)
 
 let equal_binding b1 b2 =
   match b1, b2 with
@@ -396,7 +398,7 @@ let to_string_rule r =
     (Box.to_string_fact r.hFirstTerm) (Box.to_string_fact r.hSecondTerm)
     (Box.to_string_fact r.thesisTerm)
 
-let rec to_grounded_constant cBindingList cns =
+let to_grounded_constant cBindingList cns =
   if not (Term.has_full_variable_constant cns)
   then None
   else (
@@ -432,7 +434,7 @@ let rec to_grounded_role (rBindingList: rBinding list)
     | Base(_) -> None
     | Variable(_) -> mm rBindingList rol
     | Inverse(r1) -> (
-      let res = mm rBindingList r1 in
+      let res = to_grounded_role rBindingList r1 in
       match res with
       | None -> None
       | Some(r) -> Some(Inverse(r))
@@ -455,22 +457,22 @@ let rec to_grounded_base rBindingList bBindingList bAse =
     match bAse with
     | Variable(_) -> mm bBindingList bAse
     | Negation(b1) -> (
-      let res = mm bBindingList b1 in
+      let res = to_grounded_base rBindingList bBindingList b1 in
       match res with
       | None -> None
       | Some(r) -> Some(Negation(r))
     )
     | Intersection(b1, b2) -> (
-      let res1 = mm bBindingList b1 in
-      let res2 = mm bBindingList b2 in
+      let res1 = to_grounded_base rBindingList bBindingList b1 in
+      let res2 = to_grounded_base rBindingList bBindingList b2 in
       match res1, res2 with
       | None, _ -> None
       | _, None -> None
       | Some(r1), Some(r2) -> Some(Intersection(r1, r2))
     )
     | Union(b1, b2) -> (
-      let res1 = mm bBindingList b1 in
-      let res2 = mm bBindingList b2 in
+      let res1 = to_grounded_base rBindingList bBindingList b1 in
+      let res2 = to_grounded_base rBindingList bBindingList b2 in
       match res1, res2 with
       | None, _ -> None
       | _, None -> None
@@ -478,7 +480,7 @@ let rec to_grounded_base rBindingList bBindingList bAse =
     )
     | Exists(r1, b1) -> (
       let rol1 = to_grounded_role rBindingList r1 in
-      let res1 = mm bBindingList b1 in
+      let res1 = to_grounded_base rBindingList bBindingList b1 in
       match rol1, res1 with
       | None, _ -> None
       | _, None -> None
@@ -486,7 +488,7 @@ let rec to_grounded_base rBindingList bBindingList bAse =
     ) 
     | ForAll(r1, b1) -> (
       let rol1 = to_grounded_role rBindingList r1 in
-      let res1 = mm bBindingList b1 in
+      let res1 = to_grounded_base rBindingList bBindingList b1 in
       match rol1, res1 with
       | None, _ -> None
       | _, None -> None
@@ -538,7 +540,7 @@ let generate_fact_from_binding nmd nmr cbList rbList bbList (fa:Box.fact):
   )
 
 let apply_rule (rul:rule) (fact1:Box.fact) 
-    (fact2:Box.fact) (default:Box.fact): Box.fact option =
+    (fact2:Box.fact): Box.fact option =
   match (rul.hFirstTerm),fact1, rul.hSecondTerm, fact2 with
   | A(rulAfact1), A(fact1Afact), A(rulAfact2),A(fact2Afact) -> (
     match rulAfact1, fact1Afact, rulAfact2, fact2Afact with
@@ -625,7 +627,7 @@ let apply_rule (rul:rule) (fact1:Box.fact)
 
       let cL21 = map_to_from_constant cs21 rcs21 in
       let cL22 = map_to_from_constant cs22 rcs22 in
-      let (rv2, rL2) = map_to_from_role rol1 rrol1 in
+      let (rv2, rL2) = map_to_from_role rol2 rrol2 in
 
       if not (rv1 && rv2) 
       then None

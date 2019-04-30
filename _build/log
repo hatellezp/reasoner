@@ -1,16 +1,11 @@
 # dune build bin/main.exe
 # OCAMLPARAM: unset
-$ /usr/bin/nproc > /tmp/dune79c2a1.output 2> /dev/null
-$ /home/horacio/.opam/default/bin/ocamlc.opt -config > /tmp/dunee5ae12.output
+$ /usr/bin/nproc > /tmp/dune241d91.output 2> /dev/null
+$ /home/horacio/.opam/default/bin/ocamlc.opt -config > /tmp/duneba9ae3.output
 $ (cd _build/default && /home/horacio/.opam/default/bin/ocamldep.opt -modules -impl lib/mapper.ml) > _build/default/lib/.brain.objs/mapper.ml.d
 $ (cd _build/default && /home/horacio/.opam/default/bin/ocamlc.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I lib/.brain.objs/byte -no-alias-deps -opaque -open Brain -o lib/.brain.objs/byte/brain__Mapper.cmo -c -impl lib/mapper.ml)
-> File "lib/mapper.ml", line 399, characters 8-28:
-> Error (warning 39): unused rec flag.
-> File "lib/mapper.ml", line 417, characters 8-24:
-> Error (warning 39): unused rec flag.
-> File "lib/mapper.ml", line 442, characters 8-24:
-> Error (warning 39): unused rec flag.
-> File "lib/mapper.ml", line 686, characters 20-23:
-> Error: This expression has type bool
->        This is not a function; it cannot be applied.
-[2]
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlopt.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I lib/.brain.objs/byte -I lib/.brain.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Brain -o lib/.brain.objs/native/brain__Mapper.cmx -c -impl lib/mapper.ml)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlopt.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o lib/brain.cmxa lib/.brain.objs/native/brain.cmx lib/.brain.objs/native/brain__Helper.cmx lib/.brain.objs/native/brain__Term.cmx lib/.brain.objs/native/brain__Box.cmx lib/.brain.objs/native/brain__Mapper.cmx)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlc.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I bin/.main.eobjs/byte -I lib/.brain.objs/byte -I lib/.brain.objs/native -no-alias-deps -opaque -o bin/.main.eobjs/byte/main.cmo -c -impl bin/main.ml)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlopt.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I lib/.brain.objs/byte -I lib/.brain.objs/native -intf-suffix .ml -no-alias-deps -opaque -o bin/.main.eobjs/native/main.cmx -c -impl bin/main.ml)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlopt.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o bin/main.exe -I lib lib/brain.cmxa bin/.main.eobjs/native/main.cmx)

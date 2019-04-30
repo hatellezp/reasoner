@@ -10,7 +10,6 @@ type role = | Variable of string
             | Base of string
             | Inverse of role
 
-
 let rec copy_role r =
   match r with
   | Variable(s) -> Variable(s)
@@ -54,14 +53,14 @@ let rec has_variable_role (r:role): bool =
 
 let has_full_variable_role r = has_variable_role r
 
+let is_grounded_role r = not (has_variable_role r)
+
 let rec to_string_role r =
   match r with
   | Variable(s) -> (sprintf "(v:%s)" s)
   | Base(s) -> (sprintf "(%s)" s)
   | Inverse(r1) -> ("-" ^ (to_string_role r1))
 
-
-  
 (*============================================================================*)
 
 type concept_type = | Variable
@@ -347,6 +346,8 @@ let rec has_full_variable_base b =
   | ForAll(r1, b1) -> (has_full_variable_base b1) && (has_full_variable_role r1)
   | _ -> false
 
+let is_grounded_base b = not (has_variable_base b)
+
 let type_base (b:base):concept_type =
   match b with
   | Variable(_) -> Variable
@@ -377,6 +378,8 @@ let equal_concept c1 c2 =
 let to_string_concept c = c.name
 
 let has_full_variable_concept c = has_full_variable_base c.value
+
+let is_grounded_concept c = is_grounded_base c.value
 
 let make_raw (n:string) (b:base) =
   let b1 = nnf_and_reduce b in
@@ -445,6 +448,8 @@ let has_full_variable_constant (c:constant): bool =
   match c with
   | Variable(_) -> true
   | _ -> false
+
+let is_grounded_constant (c:constant): bool = not (has_full_variable_constant c)
 
 let to_string_constant (c:constant): string =
   match c with
