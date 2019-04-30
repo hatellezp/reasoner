@@ -1,0 +1,16 @@
+# dune build bin/main.exe
+# OCAMLPARAM: unset
+$ /usr/bin/nproc > /tmp/dune79c2a1.output 2> /dev/null
+$ /home/horacio/.opam/default/bin/ocamlc.opt -config > /tmp/dunee5ae12.output
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamldep.opt -modules -impl lib/mapper.ml) > _build/default/lib/.brain.objs/mapper.ml.d
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlc.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I lib/.brain.objs/byte -no-alias-deps -opaque -open Brain -o lib/.brain.objs/byte/brain__Mapper.cmo -c -impl lib/mapper.ml)
+> File "lib/mapper.ml", line 399, characters 8-28:
+> Error (warning 39): unused rec flag.
+> File "lib/mapper.ml", line 417, characters 8-24:
+> Error (warning 39): unused rec flag.
+> File "lib/mapper.ml", line 442, characters 8-24:
+> Error (warning 39): unused rec flag.
+> File "lib/mapper.ml", line 686, characters 20-23:
+> Error: This expression has type bool
+>        This is not a function; it cannot be applied.
+[2]

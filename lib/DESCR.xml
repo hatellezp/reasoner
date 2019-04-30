@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<descrip>
+    <bin>
+    </bin>
+    <lib>
+        <term>
+            <base/>
+            <role/>
+            <concept/>
+        </term>
+        <helper>
+            <.../>
+        </helper>
+        <mapper>
+            <.../>
+        </mapper>
+    </lib>
+</descrip>

@@ -1,0 +1,11 @@
+(** @canonical Brain.Box *)
+module Box = Brain__Box
+
+(** @canonical Brain.Helper *)
+module Helper = Brain__Helper
+
+(** @canonical Brain.Mapper *)
+module Mapper = Brain__Mapper
+
+(** @canonical Brain.Term *)
+module Term = Brain__Term
