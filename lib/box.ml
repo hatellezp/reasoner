@@ -15,8 +15,11 @@ let is_grounded_t_fact f =
   (Term.is_grounded_concept f.subsumed) &&
   (Term.is_grounded_concept f.subsumer)
 
+
+(*temporary change*)
 let to_string_t_fact (tf:tFact): string =
-  Printf.sprintf "[TF:(%s) <= (%s)]" tf.subsumed.name tf.subsumer.name
+  Printf.sprintf "[TF:%s < %s]" (Term.to_string_base tf.subsumed.value) 
+    (Term.to_string_base tf.subsumer.value)
 
 (*============================================================================*)
 
@@ -49,10 +52,10 @@ let is_grounded_a_fact f =
 let to_string_a_fact (af:aFact): string =
   match af with
   | Con(cons, con) -> (
-    Printf.sprintf "[AF: (%s:%s)]" (Term.to_string_constant cons) con.name
+    Printf.sprintf "[AF: %s:%s]" (Term.to_string_constant cons) con.name
   )
   | Rol(con1, con2, r) -> (
-    Printf.sprintf "[AF: ((%s, %s): %s)" (Term.to_string_constant con1)
+    Printf.sprintf "[AF: (%s, %s): %s" (Term.to_string_constant con1)
       (Term.to_string_constant con2)  (Term.to_string_role r)
   )
 

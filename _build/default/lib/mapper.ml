@@ -31,6 +31,10 @@ let verify_consistency_b_binding bb =
   let li = List.map (fun el -> vf bb el) bb in (*I prefer two lines*)
   List.fold_left (&&) true li
 
+let is_for_rule_b_binding bb =
+  (Term.is_grounded_base bb.implier) &&
+  (Term.has_full_variable_base bb.implied)
+
 (*============================================================================*)
 
 type rBinding = { implier: Term.role;
@@ -61,6 +65,10 @@ let verify_consistency_r_binding (rb:rBinding list): bool =
   in
   let li = List.map (fun el -> vf rb el) rb in (*I prefer two lines*)
   List.fold_left (&&) true li
+
+let is_for_rule_r_binding bb =
+  (Term.is_grounded_role bb.implier) &&
+  (Term.has_full_variable_role bb.implied)
 
 (*============================================================================*)
 
@@ -93,6 +101,9 @@ let verify_consistency_c_binding (cb:cBinding list): bool =
   let li = List.map (fun el -> vf cb el) cb in (*I prefer two lines*)
   List.fold_left (&&) true li
 
+let is_for_rule_c_binding bb =
+  (Term.is_grounded_constant bb.implier) &&
+  (Term.has_full_variable_constant bb.implied)
 
 (*============================================================================*)
 
@@ -181,7 +192,6 @@ let same_binding_type bdl =
       )
     )
 
-
 let unpack_binding_c bb default =
   if (same_binding_type bb) && (type_binding bb)=="c"
   then (
@@ -218,6 +228,12 @@ let unpack_binding_b rb default =
     List.map unp rb
   )
   else []
+
+let is_for_rule_binding bb =
+  match bb with
+  | B(b) -> is_for_rule_b_binding b
+  | R(r) -> is_for_rule_r_binding r
+  | C(c) -> is_for_rule_c_binding c
 
 (*============================================================================*)
 
@@ -270,6 +286,14 @@ let verify_consistency_binding bb =
     )
   )
 
+let is_for_rule_binding_bag bb =
+  let mm bl =
+    List.fold_left (&&) true (List.map is_for_rule_binding bl)
+  in
+  match bb with
+  | Conjunction(l) -> mm l
+  | Disjunction(l) -> mm l
+  
 let to_string_binding_bag bb =
   let rec lbbs binb str value =
     if value && (Helper.list_length binb) == 0 then (Printf.sprintf "%s]" str)
