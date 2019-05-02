@@ -52,7 +52,7 @@ let is_grounded_a_fact f =
 let to_string_a_fact (af:aFact): string =
   match af with
   | Con(cons, con) -> (
-    Printf.sprintf "[AF: %s:%s]" (Term.to_string_constant cons) con.name
+    Printf.sprintf "[AF: %s:%s]" (Term.to_string_constant cons) (Term.to_string_base con.value) (*change this!!*)
   )
   | Rol(con1, con2, r) -> (
     Printf.sprintf "[AF: (%s, %s): %s" (Term.to_string_constant con1)

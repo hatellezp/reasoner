@@ -1,4 +1,11 @@
-# dune exec bin/main.exe
+# dune build bin/main.exe
 # OCAMLPARAM: unset
-$ /usr/bin/nproc > /tmp/dunedcf9ad.output 2> /dev/null
-$ /home/horacio/.opam/default/bin/ocamlc.opt -config > /tmp/dunebefe53.output
+$ /usr/bin/nproc > /tmp/dune1591a9.output 2> /dev/null
+$ /home/horacio/.opam/default/bin/ocamlc.opt -config > /tmp/dune93efec.output
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamldep.opt -modules -impl lib/rule.ml) > _build/default/lib/.brain.objs/rule.ml.d
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlc.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I lib/.brain.objs/byte -no-alias-deps -opaque -open Brain -o lib/.brain.objs/byte/brain__Rule.cmo -c -impl lib/rule.ml)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlopt.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I lib/.brain.objs/byte -I lib/.brain.objs/native -intf-suffix .ml -no-alias-deps -opaque -open Brain -o lib/.brain.objs/native/brain__Rule.cmx -c -impl lib/rule.ml)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlopt.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o lib/brain.cmxa lib/.brain.objs/native/brain.cmx lib/.brain.objs/native/brain__Helper.cmx lib/.brain.objs/native/brain__Term.cmx lib/.brain.objs/native/brain__Box.cmx lib/.brain.objs/native/brain__Mapper.cmx lib/.brain.objs/native/brain__Rule.cmx lib/.brain.objs/native/brain__Syntax.cmx)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlc.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I bin/.main.eobjs/byte -I lib/.brain.objs/byte -I lib/.brain.objs/native -no-alias-deps -opaque -o bin/.main.eobjs/byte/main.cmo -c -impl bin/main.ml)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlopt.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I lib/.brain.objs/byte -I lib/.brain.objs/native -intf-suffix .ml -no-alias-deps -opaque -o bin/.main.eobjs/native/main.cmx -c -impl bin/main.ml)
+$ (cd _build/default && /home/horacio/.opam/default/bin/ocamlopt.opt -w @a-4-29-40-41-42-44-45-48-58-59-60-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o bin/main.exe -I lib lib/brain.cmxa bin/.main.eobjs/native/main.cmx)
