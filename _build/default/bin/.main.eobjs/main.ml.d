@@ -1,1 +1,1 @@
-bin/main.ml: Box Brain Mapper Term
+bin/main.ml: Box Brain Rule Term

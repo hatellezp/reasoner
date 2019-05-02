@@ -1,1 +1,1 @@
-lib/mapper.ml: Box Helper List Printf Term
+lib/mapper.ml: Helper List Printf Term

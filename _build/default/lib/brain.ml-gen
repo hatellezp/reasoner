@@ -7,6 +7,9 @@ module Helper = Brain__Helper
 (** @canonical Brain.Mapper *)
 module Mapper = Brain__Mapper
 
+(** @canonical Brain.Rule *)
+module Rule = Brain__Rule
+
 (** @canonical Brain.Syntax *)
 module Syntax = Brain__Syntax
 
