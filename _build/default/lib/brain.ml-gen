@@ -1,6 +1,9 @@
 (** @canonical Brain.Box *)
 module Box = Brain__Box
 
+(** @canonical Brain.Conflict *)
+module Conflict = Brain__Conflict
+
 (** @canonical Brain.Helper *)
 module Helper = Brain__Helper
 

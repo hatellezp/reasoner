@@ -29,8 +29,8 @@ let size_role r = depth_role r
 
 let rec equal_role r1 r2 =
   match r1, r2 with
-  | Variable(s1), Variable(s2) -> s1 == s2
-  | Base(s1), Base(s2) -> s1 == s2
+  | Variable(s1), Variable(s2) -> String.equal s1 s2
+  | Base(s1), Base(s2) -> String.equal s1 s2
   | Inverse(r11), Inverse(r22) -> equal_role r11 r22
   | _, _ -> false
 
@@ -112,10 +112,10 @@ let rec copy_base b =
 
 let rec equal_base b1 b2 =
   match b1, b2 with
-  | Variable(s1), Variable(s2) -> s1 == s2
+  | Variable(s1), Variable(s2) -> String.equal s1 s2
   | Top, Top -> true
   | Bottom, Bottom -> true
-  | Base(s1), Base(s2) -> s1 == s2
+  | Base(s1), Base(s2) -> String.equal s1 s2
   | Negation(b11), Negation(b22) -> (equal_base b11 b22)
   | Intersection(b11, b12), Intersection(b21, b22) -> (
       ((equal_base b11 b21) && (equal_base b21 b22)) ||
@@ -372,10 +372,13 @@ type concept = {name: string;
                  }
 
 let equal_concept c1 c2 =
-  (c1.name == c2.name) && (c1.size == c2.size) && (c1.depth == c2.depth) &&
+  (String.equal c1.name c2.name) && (c1.size == c2.size) && (c1.depth == c2.depth) &&
   (equal_concept_type c1.typ c2.typ) && (equal_base c1.value c2.value)
 
-let to_string_concept c = c.name
+let to_string_concept c =
+  if (String.length c.name)==0
+  then (to_string_base c.value)
+  else c.name
 
 let has_full_variable_concept c = has_full_variable_base c.value
 
@@ -440,8 +443,8 @@ type constant = | Variable of string
 
 let equal_constant (c1:constant) (c2:constant): bool =
   match c1, c2 with 
-  | Variable(s1), Variable(s2) -> s1==s2
-  | Base(s1), Base(s2) -> s1==s2
+  | Variable(s1), Variable(s2) -> String.equal s1 s2
+  | Base(s1), Base(s2) -> String.equal s1 s2
   | _, _ -> false
 
 let has_full_variable_constant (c:constant): bool =
@@ -453,8 +456,8 @@ let is_grounded_constant (c:constant): bool = not (has_full_variable_constant c)
 
 let to_string_constant (c:constant): string =
   match c with
-  | Variable(s) -> Printf.sprintf "(v:%s)" s
-  | Base(s) -> Printf.sprintf "(c:%s)" s
+  | Variable(s) -> Printf.sprintf "%s" s
+  | Base(s) -> Printf.sprintf "%s" s
 (*============================================================================*)
 
 type term = | Role of role
